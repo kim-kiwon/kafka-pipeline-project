@@ -16,13 +16,9 @@ import org.slf4j.LoggerFactory;
 import com.pipeline.config.ElasticSearchSinkConnectorConfig;
 
 public class ElasticSearchSinkConnector extends SinkConnector {
-	private final Logger log = LoggerFactory.getLogger(ElasticSearchSinkConnector.class);
+	private final Logger logger = LoggerFactory.getLogger(ElasticSearchSinkConnector.class);
 
 	private Map<String, String> configProperties;
-
-	public ElasticSearchSinkConnector(Map<String, String> configProperties) {
-		this.configProperties = configProperties;
-	}
 
 	@Override
 	public String version() {
@@ -33,7 +29,7 @@ public class ElasticSearchSinkConnector extends SinkConnector {
 	public void start(Map<String, String> props) {
 		this.configProperties = props;
 		try {
-			new ElasticSearchSinkConnector(props);
+			new ElasticSearchSinkConnectorConfig(props);
 		} catch (ConfigException e) {
 			throw new ConnectException(e.getMessage(), e);
 		}
@@ -62,6 +58,6 @@ public class ElasticSearchSinkConnector extends SinkConnector {
 
 	@Override
 	public void stop() {
-		log.info("Stop elasticsearch connector");
+		logger.info("Stop elasticsearch connector");
 	}
 }
